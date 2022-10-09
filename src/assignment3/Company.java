@@ -7,7 +7,7 @@ public class Company {
     private ArrayList<Employee> employeeList;
 
     public Company() {
-        employeeList = new ArrayList<Employee>();
+        this.employeeList = new ArrayList<>();
     }
 
     @Override
@@ -30,47 +30,71 @@ public class Company {
                 '}';
     }
 
-    public void registerEmployee(String ID, String Name, int grossSalary){
+    public void registerEmployee(String ID, String Name, int grossSalary) {
+        Employee newEmployee = new Employee(ID, Name, grossSalary);
+        this.employeeList.add(newEmployee);
+    }
+
+    public String removeEmployee(String ID) {
+
+
+        Employee desiredEmployee = findEmployee(ID);
+        if (desiredEmployee != null) {
+            employeeList.remove(desiredEmployee);
+            return "Employee " + ID + " was successfully removed.";
+        } else {
+            //todo Otherwise, refer to the possible error cases described in Epic Feature 2 (Exceptions).
+            return "";
+        }
 
     }
 
-    public String removeEmployee(String ID){
-
-        return "";
+    public String retrieveEmployee(String ID) {
+        return findEmployee(ID).toString();
     }
 
-    public Employee retrieveEmployee (String ID){
-        Employee employee = new Employee();
-
-        return employee;
-    }
-
-    public void updateName( String ID, String newName) {
+    public void updateName(String ID, String newName) {
 
     }
 
-    public void updateSalary (String ID, double newSalary){
+    public void updateSalary(String ID, double newSalary) {
 
     }
 
     public String retrieveAllEmployees() {
+        String companyEmployees = "All registered employees:";
 
-        return "";
+        for (Employee eachEmployee : employeeList) {
+            companyEmployees = companyEmployees.concat(System.lineSeparator() + eachEmployee.toString());
+        }
+
+        return companyEmployees;
     }
+
 
     public double calculateExpensesGross() {
 
         return 0.0;
     }
 
-    public double calculateExpensesNet(){
+    public double calculateExpensesNet() {
 
         return 0.0;
     }
 
-    public int getNumberOfEmployees(){
+    public int getNumberOfEmployees() {
 
         return 0;
+    }
+
+    private Employee findEmployee(String ID) {
+        for (int i = 0; i < employeeList.size(); i++) {
+            Employee currentEmployee = employeeList.get(i);
+            if (currentEmployee.getId().equals(ID)) {
+                return currentEmployee;
+            }
+        }
+        return null;
     }
 
 }
