@@ -30,9 +30,10 @@ public class Company {
                 '}';
     }
 
-    public void registerEmployee(String ID, String Name, int grossSalary) {
-        Employee newEmployee = new Employee(ID, Name, grossSalary);
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) {
+        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
         this.employeeList.add(newEmployee);
+        return "Employee "+employeeID+" was registered successfully.";
     }
 
     public String removeEmployee(String ID) {
@@ -49,7 +50,7 @@ public class Company {
 
     }
 
-    public String retrieveEmployee(String ID) {
+    public String printEmployee(String ID) {
         return findEmployee(ID).toString();
     }
 
@@ -59,6 +60,11 @@ public class Company {
 
     public void updateSalary(String ID, double newSalary) {
 
+    }
+
+    public double getNetSalary(String employeeID){
+
+        return 0.0;
     }
 
     public String retrieveAllEmployees() {
