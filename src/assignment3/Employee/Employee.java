@@ -35,7 +35,7 @@ public class Employee {
     }
 
     public void setCurrentGrossSalary(double currentGrossSalary) {
-        this.currentGrossSalary = currentGrossSalary;
+        this.currentGrossSalary = Truncate.truncateToTwoDigits(currentGrossSalary);
     }
 
     public String getID() {

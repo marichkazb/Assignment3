@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class Company {
     private ArrayList<Employee> employeeList;
+    private static final String EOL = System.lineSeparator();
 
     public Company() {
         this.employeeList = new ArrayList<Employee>();
@@ -99,11 +100,11 @@ public class Company {
 
     }
 
-    public String retrieveAllEmployees() {
+    public String printAllEmployees() {
         String companyEmployees = "All registered employees:";
 
         for (Employee eachEmployee : employeeList) {
-            companyEmployees = companyEmployees.concat(System.lineSeparator() + eachEmployee.toString());
+            companyEmployees = companyEmployees.concat(EOL + eachEmployee.toString());
         }
 
         return companyEmployees;
