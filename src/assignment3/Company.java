@@ -1,5 +1,10 @@
 package assignment3;
 
+import assignment3.Employee.Employee;
+import assignment3.Employee.Manager;
+import assignment3.Employee.Director;
+import assignment3.Employee.Intern;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -7,7 +12,7 @@ public class Company {
     private ArrayList<Employee> employeeList;
 
     public Company() {
-        this.employeeList = new ArrayList<>();
+        this.employeeList = new ArrayList<Employee>();
     }
 
     @Override
@@ -30,6 +35,35 @@ public class Company {
                 '}';
     }
 
+    //create employees overloading
+    public String createEmployee(String ID, String employeeName, double grossSalary) {
+        Employee newEmployee = new Employee(ID, employeeName, grossSalary);
+        this.employeeList.add(newEmployee);
+        return this.registeredString(ID);
+    }
+
+    public String createEmployee(String ID, String employeeName, double grossSalary, String degree) {
+        Employee newEmployee = new Manager(ID, employeeName, grossSalary, degree);
+        this.employeeList.add(newEmployee);
+        return this.registeredString(ID);
+    }
+
+    public String createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) {
+        Employee newEmployee = new Director(ID, employeeName, grossSalary, degree, department);
+        this.employeeList.add(newEmployee);
+        return this.registeredString(ID);
+    }
+
+    public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) {
+        Employee newEmployee = new Intern(ID, employeeName, grossSalary, GPA);
+        this.employeeList.add(newEmployee);
+        return this.registeredString(ID);
+    }
+
+    private String registeredString(String ID) {
+        return "Employee " + ID + " was registered successfully.";
+    }
+
     public void registerEmployee(String ID, String Name, int grossSalary) {
         Employee newEmployee = new Employee(ID, Name, grossSalary);
         this.employeeList.add(newEmployee);
@@ -46,10 +80,14 @@ public class Company {
             //todo Otherwise, refer to the possible error cases described in Epic Feature 2 (Exceptions).
             return "";
         }
-
     }
 
-    public String retrieveEmployee(String ID) {
+    public double getNetSalary(String ID) {
+        Employee desiredEmployee = findEmployee(ID);
+        return desiredEmployee.getNetSalary();
+    }
+
+    public String printEmployee(String ID) {
         return findEmployee(ID).toString();
     }
 
@@ -87,10 +125,11 @@ public class Company {
         return 0;
     }
 
+    //maybe it's possible to use forEach method, then you will not need for loop
     private Employee findEmployee(String ID) {
         for (int i = 0; i < employeeList.size(); i++) {
             Employee currentEmployee = employeeList.get(i);
-            if (currentEmployee.getId().equals(ID)) {
+            if (currentEmployee.getID().equals(ID)) {
                 return currentEmployee;
             }
         }
