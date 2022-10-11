@@ -54,7 +54,7 @@ public class Employee {
     }
 
     public String toString() {
-        return this.name + "'s gross salary is " + String.format("%.2f", (this.getCurrentGrossSalary())) + " SEK per month.";
+        return this.name + String.format("'s gross salary is %.2f SEK per month.", (this.getCurrentGrossSalary()));
     }
 
     public double getNetSalary() {
