@@ -137,4 +137,28 @@ public class Company {
         return null;
     }
 
+
+    public String promoteToManager(String ID, String degree) {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newManager = new Manager(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), degree);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newManager);
+        return ID + " promoted successfully to Manager.";
+    }
+
+    public String promoteToDirector(String ID, String degree, String department) {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newDirector = new Director(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), degree, department);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newDirector);
+        return ID + " promoted successfully to Director.";
+    }
+
+    public String promoteToIntern(String ID, int GPA) {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newIntern = new Intern(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), GPA);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newIntern);
+        return ID + " promoted successfully to Intern.";
+    }
 }
