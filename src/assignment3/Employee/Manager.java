@@ -14,7 +14,7 @@ public class Manager extends Employee {
 
     @Override
     public String toString() {
-        return this.degree + " " + super.getName() + "'s gross salary is " + this.getCurrentGrossSalary() + " SEK per month.";
+        return this.degree + " " + super.getName() + "'s gross salary is " + String.format("%.2f", this.getCurrentGrossSalary()) + " SEK per month.";
     }
 
     public void calculateCurrentGrossSalary() {

@@ -101,10 +101,10 @@ public class Company {
     }
 
     public String printAllEmployees() {
-        String companyEmployees = "All registered employees:";
+        String companyEmployees = "All registered employees:" + EOL;
 
         for (Employee eachEmployee : employeeList) {
-            companyEmployees = companyEmployees.concat(EOL + eachEmployee.toString());
+            companyEmployees = companyEmployees.concat(eachEmployee.toString() + EOL);
         }
 
         return companyEmployees;

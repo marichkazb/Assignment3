@@ -25,11 +25,6 @@ public class Employee {
     public double getGrossSalary() {
         return this.GROSS_SALARY;
     }
-
-    public void increaseGrossSalary(double bonus) {
-        this.currentGrossSalary = this.currentGrossSalary + bonus;
-    }
-
     public double getCurrentGrossSalary() {
         return this.currentGrossSalary;
     }
@@ -59,7 +54,7 @@ public class Employee {
     }
 
     public String toString() {
-        return this.name + "'s gross salary is " + this.getCurrentGrossSalary() + " SEK per month.";
+        return this.name + "'s gross salary is " + String.format("%.2f", (this.getCurrentGrossSalary())) + " SEK per month.";
     }
 
     public double getNetSalary() {
