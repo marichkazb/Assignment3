@@ -1,4 +1,8 @@
 package assignment3.Employee;
+
+import assignment3.Degrees;
+import assignment3.Truncate;
+
 import java.util.HashMap;
 
 public class Manager extends Employee {
@@ -17,11 +21,13 @@ public class Manager extends Employee {
     }
 
     public double getGrossSalary() {
-        HashMap<String, Double> degreesCollection = new HashMap<String, Double>();
-        degreesCollection.put("BSc", 1.1);
-        degreesCollection.put("MSc", 1.2);
-        degreesCollection.put("PhD", 1.35);
-        return super.getGrossSalary() * degreesCollection.get(this.degree);
+        HashMap<String, Double> degreeMultiplier = new HashMap<String, Double>();
+
+        degreeMultiplier.put(Degrees.BSC.toString(), 1.1);
+        degreeMultiplier.put(Degrees.MSC.toString(), 1.2);
+        degreeMultiplier.put(Degrees.PHD.toString(), 1.35);
+
+        return Truncate.truncateToTwoDigits(super.getGrossSalary() * degreeMultiplier.get(this.degree));
     }
 
     public boolean hasInvalidDegree() {

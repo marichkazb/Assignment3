@@ -1,17 +1,17 @@
 package assignment3.Employee;
 
+import assignment3.Truncate;
+
 public class Employee {
 
     private final String ID;
     private String name;
-    private final double BASE_GROSS_SALARY;
-    private double grossSalary;
+    private double BASE_GROSS_SALARY;
 
     public Employee(String ID, String name, double grossSalary) {
         this.ID = ID;
         this.name = name;
         this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
-        this.grossSalary = Truncate.truncateToTwoDigits(grossSalary);
     }
 
     public String getName() {
@@ -26,11 +26,7 @@ public class Employee {
         return BASE_GROSS_SALARY;
     }
     public double getGrossSalary() {
-        return this.grossSalary;
-    }
-
-    public void setGrossSalary(double grossSalary) {
-        this.grossSalary = Truncate.truncateToTwoDigits(grossSalary);
+        return this.BASE_GROSS_SALARY;
     }
 
     public String getID() {
@@ -54,11 +50,11 @@ public class Employee {
     }
 
     public String toString() {
-        return this.name + String.format("'s gross salary is %.2f SEK per month.", (this.grossSalary));
+        return this.name + "'s gross salary is " + String.format("%.2f", this.getGrossSalary()) + " SEK per month.";
     }
 
     public double getNetSalary() {
-        return Truncate.truncateToTwoDigits(this.grossSalary - (this.grossSalary * 0.1));
+        return Truncate.truncateToTwoDigits(this.getGrossSalary() - (this.getGrossSalary() * 0.1));
     }
 
     public boolean hasEmptyID() {
@@ -68,6 +64,6 @@ public class Employee {
         return this.name.isEmpty();
     }
     public boolean hasInvalidSalary() {
-        return this.grossSalary <= 0;
+        return this.getGrossSalary() <= 0;
     }
 }

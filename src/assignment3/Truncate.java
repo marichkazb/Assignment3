@@ -1,8 +1,6 @@
-package assignment3.Employee;
+package assignment3;
 
 public class Truncate {
-
-
     public static double truncateToNumDigits = 2;
     public static double truncateToTwoDigits(double number) {
 

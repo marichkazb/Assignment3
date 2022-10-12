@@ -1,9 +1,6 @@
 package assignment3;
 
-import assignment3.Employee.Employee;
-import assignment3.Employee.Manager;
-import assignment3.Employee.Director;
-import assignment3.Employee.Intern;
+import assignment3.Employee.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -38,26 +35,42 @@ public class Company {
 
     //create employees overloading
     public String createEmployee(String ID, String employeeName, double grossSalary) {
-        Employee newEmployee = new Employee(ID, employeeName, grossSalary);
-        this.employeeList.add(newEmployee);
+        try {
+            Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary);
+            this.employeeList.add(newEmployee);
+        } catch (Exception err) {
+            System.out.println(err);
+        }
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, String degree) {
-        Employee newEmployee = new Manager(ID, employeeName, grossSalary, degree);
-        this.employeeList.add(newEmployee);
+        try {
+            Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree);
+            this.employeeList.add(newEmployee);
+        } catch (Exception err) {
+            System.out.println(err);
+        }
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) {
-        Employee newEmployee = new Director(ID, employeeName, grossSalary, degree, department);
-        this.employeeList.add(newEmployee);
+        try {
+            Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree, department);
+            this.employeeList.add(newEmployee);
+        } catch (Exception err) {
+            System.out.println(err);
+        }
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) {
-        Employee newEmployee = new Intern(ID, employeeName, grossSalary, GPA);
-        this.employeeList.add(newEmployee);
+        try {
+            Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, GPA);
+            this.employeeList.add(newEmployee);
+        } catch (Exception err) {
+            System.out.println(err);
+        }
         return this.registeredString(ID);
     }
 

@@ -1,5 +1,8 @@
 package assignment3.Employee;
 
+import assignment3.Degrees;
+import assignment3.Depts;
+
 public class Director extends Manager {
     private String department;
     public Director(String ID, String name, double grossSalary, String degree, String department) {
@@ -24,7 +27,7 @@ public class Director extends Manager {
     @Override
     public double getNetSalary() {
         double netSalary;
-        if (getGrossSalary() > 30000) {
+        if (getGrossSalary() < 30000) {
             return super.getNetSalary();
         } else if (getGrossSalary() < 50000) {
             netSalary = getGrossSalary() * 0.8;
@@ -32,6 +35,12 @@ public class Director extends Manager {
             double amountAboveLimit = getGrossSalary() - 30000;
             netSalary = getGrossSalary() - (30000 * 0.2) - amountAboveLimit * 0.4;
         }
-        return Truncate.truncateToTwoDigits(netSalary);
+        return netSalary;
+    }
+    
+    public boolean hasInvalidDepartment() {
+        return !(this.department.equals(Depts.BUSINESS.toString())
+                || this.department.equals(Depts.HUMAN_RESOURCES.toString())
+                || this.department.equals(Depts.TECHNICAL.toString()));
     }
 }
