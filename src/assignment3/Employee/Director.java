@@ -5,14 +5,21 @@ import assignment3.Depts;
 
 public class Director extends Manager {
     private String department;
+
     public Director(String ID, String name, double grossSalary, String degree, String department) {
         super(ID, name, grossSalary, degree);
         this.department = department;
     }
 
-    public String getDepartment() { return this.department; }
+    public String getDepartment() {
+        return this.department;
+    }
 
-    public String setDepartment(String department) { return this.department = department; }
+    //Director: Can change his/her department.
+    public String updateDirectorDept(String department) {
+        this.department = department;
+        return successfulUpdate();
+    }
 
     @Override
     public String toString() {
@@ -24,6 +31,7 @@ public class Director extends Manager {
         int ADDITIONAL_SALARY = 5000;
         return super.getGrossSalary() + ADDITIONAL_SALARY;
     }
+
     @Override
     public double getNetSalary() {
         double netSalary;

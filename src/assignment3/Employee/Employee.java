@@ -18,13 +18,26 @@ public class Employee {
         return name;
     }
 
-    public void setName(String name) {
+    //Regular employees and subclasses (e.g. Manager): Can change name.
+    public String updateEmployeeName(String name) {
         this.name = name;
+        return successfulUpdate();
+    }
+
+    //Regular employees and subclasses (e.g. Manager): Can change gross salary.
+    public String updateGrossSalary(double BASE_GROSS_SALARY) {
+        this.BASE_GROSS_SALARY = BASE_GROSS_SALARY;
+        return successfulUpdate();
+    }
+
+    public String successfulUpdate() {
+        return "Employee " + ID + " was updated successfully";
     }
 
     public double getBaseGrossSalary() {
         return BASE_GROSS_SALARY;
     }
+
     public double getGrossSalary() {
         return this.BASE_GROSS_SALARY;
     }
@@ -60,9 +73,11 @@ public class Employee {
     public boolean hasEmptyID() {
         return this.ID.isEmpty();
     }
+
     public boolean hasEmptyName() {
         return this.name.isEmpty();
     }
+
     public boolean hasInvalidSalary() {
         return this.getGrossSalary() <= 0;
     }

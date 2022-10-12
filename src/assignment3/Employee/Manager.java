@@ -7,13 +7,21 @@ import java.util.HashMap;
 
 public class Manager extends Employee {
     private String degree;
+
     public Manager(String ID, String name, double grossSalary, String degree) {
         super(ID, name, grossSalary);
         this.degree = degree;
     }
 
-    public String getDegree() { return this.degree; }
-    public String setDegree(String degree) { return this.degree = degree; }
+    public String getDegree() {
+        return this.degree;
+    }
+
+    //Manager and children (e.g. Director) can change his/her degree.
+    public String updateManagerDegree(String degree) {
+        this.degree = degree;
+        return successfulUpdate();
+    }
 
     @Override
     public String toString() {
@@ -31,6 +39,6 @@ public class Manager extends Employee {
     }
 
     public boolean hasInvalidDegree() {
-        return !(this.degree.equals("BSc") || this.degree.equals("MSc") || this.degree.equals("PhD"));
+        return !(this.degree.equals(Degrees.BSC.toString()) || this.degree.equals(Degrees.MSC.toString()) || this.degree.equals(Degrees.PHD.toString()));
     }
 }

@@ -3,6 +3,7 @@ package assignment3;
 import assignment3.Employee.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Company {
@@ -174,4 +175,77 @@ public class Company {
         employeeList.add(newIntern);
         return ID + " promoted successfully to Intern.";
     }
+
+
+    public String updateEmployeeName(String ID, String newName) {
+        return findEmployee(ID).updateEmployeeName(newName);
+    }
+
+    public String updateGrossSalary(String ID, double newGrossSalary) {
+        return findEmployee(ID).updateGrossSalary(newGrossSalary);
+    }
+
+    public String updateInternGPA(String ID, int newGPA) {
+        return ((Intern) findEmployee(ID)).updateInternGPA(newGPA);
+    }
+
+
+    public String updateManagerDegree(String ID, String newDegree) {
+        return ((Manager) findEmployee(ID)).updateManagerDegree(newDegree);
+    }
+
+
+    public String updateDirectorDept(String ID, String newDept) {
+        return ((Director) findEmployee(ID)).updateDirectorDept(newDept);
+    }
+
+    public HashMap mapEachDegree() {
+
+        int BScCount = 0;
+        int MScCount = 0;
+        int PhDCount = 0;
+
+        for (Employee currentEmployee : employeeList) {
+            if (currentEmployee instanceof Manager) {
+                String degree = ((Manager) currentEmployee).getDegree();
+                switch (Degrees.valueOf(degree)) {
+                    case BSC:
+                        BScCount++;
+                        break;
+                    case MSC:
+                        MScCount++;
+                        break;
+                    case PHD:
+                        PhDCount++;
+                        break;
+                }
+            }
+        }
+        
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        if (BScCount != 0) {
+            hashMap.put(Degrees.BSC.toString(), BScCount);
+        }
+        if (MScCount != 0) {
+            hashMap.put(Degrees.MSC.toString(), MScCount);
+        }
+        if (PhDCount != 0) {
+            hashMap.put(Degrees.PHD.toString(), PhDCount);
+        }
+        return hashMap;
+
+    }
+
+    public double getTotalNetSalary() {
+        double totalNetSalary = 0;
+        for (Employee employee: employeeList) {
+            totalNetSalary = totalNetSalary + employee.getNetSalary();
+        }
+        return totalNetSalary;
+    }
+
+    public String printSortedEmployees() {
+        return "Employees sorted by gross salary (ascending order):" + EOL;
+    }
 }
+
