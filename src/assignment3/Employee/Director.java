@@ -17,21 +17,20 @@ public class Director extends Manager {
     }
 
     @Override
-    public void calculateCurrentGrossSalary() {
+    public double getGrossSalary() {
         int ADDITIONAL_SALARY = 5000;
-        super.calculateCurrentGrossSalary();
-        this.setCurrentGrossSalary(this.getCurrentGrossSalary() + ADDITIONAL_SALARY);
+        return super.getGrossSalary() + ADDITIONAL_SALARY;
     }
     @Override
     public double getNetSalary() {
         double netSalary;
-        if (this.getCurrentGrossSalary() > 30000 && this.getCurrentGrossSalary() < 50000) {
-            netSalary = this.getCurrentGrossSalary() - (this.getCurrentGrossSalary() * 0.2);
-        } else if (this.getCurrentGrossSalary() > 50000) {
-            double amountAboveLimit = this.getCurrentGrossSalary() - 30000;
-            netSalary = this.getCurrentGrossSalary() - (30000 * 0.2) - (amountAboveLimit * 0.4);
+        if (getGrossSalary() > 30000) {
+            return super.getNetSalary();
+        } else if (getGrossSalary() < 50000) {
+            netSalary = getGrossSalary() * 0.8;
         } else {
-            netSalary = super.getNetSalary();
+            double amountAboveLimit = getGrossSalary() - 30000;
+            netSalary = getGrossSalary() - (30000 * 0.2) - amountAboveLimit * 0.4;
         }
         return Truncate.truncateToTwoDigits(netSalary);
     }

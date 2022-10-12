@@ -3,14 +3,13 @@ package assignment3.Employee;
 public class Truncate {
 
 
-    public static double truncateToNumDigits = 100; //number of 0s denotes number of signs after coma
+    public static double truncateToNumDigits = 2;
     public static double truncateToTwoDigits(double number) {
 
-        double numberToCast = number * truncateToNumDigits;
+        double truncateAuxiliary = Math.pow(10, truncateToNumDigits); //number of 0s denotes number of signs after coma
+        double numberToCast = number * truncateAuxiliary;
         double numberToTruncate = (int) numberToCast;
-        return numberToTruncate / truncateToNumDigits;
-
-//        String.format("%.2f", Math.floor(Math.pow(10, 2) * number)/Math.pow(10, 2));
+        return numberToTruncate / truncateAuxiliary;
     }
 
 }

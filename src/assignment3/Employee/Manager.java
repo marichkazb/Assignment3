@@ -6,7 +6,6 @@ public class Manager extends Employee {
     public Manager(String ID, String name, double grossSalary, String degree) {
         super(ID, name, grossSalary);
         this.degree = degree;
-        this.calculateCurrentGrossSalary();
     }
 
     public String getDegree() { return this.degree; }
@@ -17,13 +16,15 @@ public class Manager extends Employee {
         return this.degree + " " + super.toString();
     }
 
-    public void calculateCurrentGrossSalary() {
+    public double getGrossSalary() {
         HashMap<String, Double> degreesCollection = new HashMap<String, Double>();
-        degreesCollection.put("BSc", 0.1);
-        degreesCollection.put("MSc", 0.2);
-        degreesCollection.put("PhD", 0.35);
+        degreesCollection.put("BSc", 1.1);
+        degreesCollection.put("MSc", 1.2);
+        degreesCollection.put("PhD", 1.35);
+        return super.getGrossSalary() * degreesCollection.get(this.degree);
+    }
 
-        double bonus = super.getCurrentGrossSalary() * degreesCollection.get(this.degree);
-        this.setCurrentGrossSalary(super.getCurrentGrossSalary() + bonus);
+    public boolean hasInvalidDegree() {
+        return !(this.degree.equals("BSc") || this.degree.equals("MSc") || this.degree.equals("PhD"));
     }
 }

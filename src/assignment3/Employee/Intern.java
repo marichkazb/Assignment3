@@ -19,16 +19,16 @@ public class Intern extends Employee {
     public void calculateCurrentGrossSalary() {
         int BONUS_SALARY = 1000;
         if (this.GPA <= 5) {
-            this.setCurrentGrossSalary(0);
+            this.setGrossSalary(0);
         } else if (this.GPA >= 8) {
-            this.setCurrentGrossSalary(this.getCurrentGrossSalary() + BONUS_SALARY);
+            this.setGrossSalary(this.getGrossSalary() + BONUS_SALARY);
         } else {
-            this.setCurrentGrossSalary(super.getGrossSalary());
+            this.setGrossSalary(super.getGrossSalary());
         }
     }
 
     @Override
     public double getNetSalary() {
-        return Truncate.truncateToTwoDigits(this.getCurrentGrossSalary());
+        return Truncate.truncateToTwoDigits(this.getGrossSalary());
     }
 }
