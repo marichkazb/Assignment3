@@ -1,11 +1,12 @@
 package assignment3.Employee;
 
+import assignment3.ExceptionsHandler;
 import assignment3.Truncate;
 
 public class Intern extends Employee {
     private int GPA;
 
-    public Intern(String ID, String name, double grossSalary, int GPA) {
+    public Intern(String ID, String name, double grossSalary, int GPA) throws ExceptionsHandler {
         super(ID, name, grossSalary);
         this.GPA = GPA;
     }

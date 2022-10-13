@@ -95,7 +95,7 @@ public class Company {
         return "Employee " + ID + " was registered successfully.";
     }
 
-    public void registerEmployee(String ID, String Name, int grossSalary) {
+    public void registerEmployee(String ID, String Name, int grossSalary) throws ExceptionsHandler {
         Employee newEmployee = new Employee(ID, Name, grossSalary);
         this.employeeList.add(newEmployee);
     }

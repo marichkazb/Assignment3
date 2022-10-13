@@ -2,11 +2,12 @@ package assignment3.Employee;
 
 import assignment3.Degrees;
 import assignment3.Depts;
+import assignment3.ExceptionsHandler;
 
 public class Director extends Manager {
     private String department;
 
-    public Director(String ID, String name, double grossSalary, String degree, String department) {
+    public Director(String ID, String name, double grossSalary, String degree, String department) throws ExceptionsHandler {
         super(ID, name, grossSalary, degree);
         this.department = department;
     }

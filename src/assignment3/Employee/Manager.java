@@ -1,6 +1,7 @@
 package assignment3.Employee;
 
 import assignment3.Degrees;
+import assignment3.ExceptionsHandler;
 import assignment3.Truncate;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 public class Manager extends Employee {
     private String degree;
 
-    public Manager(String ID, String name, double grossSalary, String degree) {
+    public Manager(String ID, String name, double grossSalary, String degree) throws ExceptionsHandler {
         super(ID, name, grossSalary);
         this.degree = degree;
     }

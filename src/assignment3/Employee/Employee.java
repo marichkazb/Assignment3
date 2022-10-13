@@ -1,5 +1,6 @@
 package assignment3.Employee;
 
+import assignment3.ExceptionsHandler;
 import assignment3.Truncate;
 
 public class Employee {
@@ -8,10 +9,23 @@ public class Employee {
     private String name;
     private double BASE_GROSS_SALARY;
 
-    public Employee(String ID, String name, double grossSalary) {
+    public Employee(String ID, String name, double grossSalary) throws ExceptionsHandler {
+
         this.ID = ID;
         this.name = name;
         this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
+
+        if (ID.isEmpty()) {
+            throw new ExceptionsHandler("ID cannot be blank.");
+        }
+        if (name.isBlank()) {
+            throw new ExceptionsHandler("Name cannot be blank.");
+        }
+        if (BASE_GROSS_SALARY<=0) {
+            throw new ExceptionsHandler("Salary must be greater than zero.");
+        }
+
+
     }
 
     public String getName() {
@@ -20,6 +34,7 @@ public class Employee {
 
     //Regular employees and subclasses (e.g. Manager): Can change name.
     public String updateEmployeeName(String name) {
+
         this.name = name;
         return successfulUpdate();
     }
@@ -70,15 +85,4 @@ public class Employee {
         return Truncate.truncateToTwoDigits(this.getGrossSalary() - (this.getGrossSalary() * 0.1));
     }
 
-    public boolean hasEmptyID() {
-        return this.ID.isEmpty();
-    }
-
-    public boolean hasEmptyName() {
-        return this.name.isBlank();
-    }
-
-    public boolean hasInvalidSalary() {
-        return this.getGrossSalary() <= 0;
-    }
 }
