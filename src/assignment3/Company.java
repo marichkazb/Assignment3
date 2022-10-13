@@ -140,7 +140,6 @@ public class Company {
         return 0;
     }
 
-    //maybe it's possible to use forEach method, then you will not need for loop
     private Employee findEmployee(String ID) {
         for (int i = 0; i < employeeList.size(); i++) {
             Employee currentEmployee = employeeList.get(i);
@@ -154,7 +153,7 @@ public class Company {
 
     public String promoteToManager(String ID, String degree) {
         Employee currentEmployee = findEmployee(ID);
-        Employee newManager = new Manager(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), degree);
+        Employee newManager = new Manager(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
         employeeList.remove(currentEmployee);
         employeeList.add(newManager);
         return ID + " promoted successfully to Manager.";
@@ -162,7 +161,7 @@ public class Company {
 
     public String promoteToDirector(String ID, String degree, String department) {
         Employee currentEmployee = findEmployee(ID);
-        Employee newDirector = new Director(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), degree, department);
+        Employee newDirector = new Director(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
         employeeList.remove(currentEmployee);
         employeeList.add(newDirector);
         return ID + " promoted successfully to Director.";
@@ -170,7 +169,7 @@ public class Company {
 
     public String promoteToIntern(String ID, int GPA) {
         Employee currentEmployee = findEmployee(ID);
-        Employee newIntern = new Intern(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getGrossSalary(), GPA);
+        Employee newIntern = new Intern(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
         employeeList.remove(currentEmployee);
         employeeList.add(newIntern);
         return ID + " promoted successfully to Intern.";
@@ -199,7 +198,7 @@ public class Company {
         return ((Director) findEmployee(ID)).updateDirectorDept(newDept);
     }
 
-    public HashMap mapEachDegree() {
+    public HashMap<String, Integer> mapEachDegree() {
 
         int BScCount = 0;
         int MScCount = 0;
@@ -208,7 +207,7 @@ public class Company {
         for (Employee currentEmployee : employeeList) {
             if (currentEmployee instanceof Manager) {
                 String degree = ((Manager) currentEmployee).getDegree();
-                switch (Degrees.valueOf(degree)) {
+                switch (Degrees.valueOf(degree.toUpperCase())) {
                     case BSC:
                         BScCount++;
                         break;
@@ -218,10 +217,12 @@ public class Company {
                     case PHD:
                         PhDCount++;
                         break;
+                    default:
+                        break;
                 }
             }
         }
-        
+
         HashMap<String, Integer> hashMap = new HashMap<>();
         if (BScCount != 0) {
             hashMap.put(Degrees.BSC.toString(), BScCount);
