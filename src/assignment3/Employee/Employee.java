@@ -75,7 +75,7 @@ public class Employee {
     }
 
     public boolean hasEmptyName() {
-        return this.name.isEmpty();
+        return this.name.isBlank();
     }
 
     public boolean hasInvalidSalary() {
