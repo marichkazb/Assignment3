@@ -1,6 +1,6 @@
 package assignment3.Employee;
 
-import assignment3.ExceptionsHandler;
+import assignment3.EmployeeException;
 import assignment3.Truncate;
 
 public class Employee {
@@ -9,23 +9,32 @@ public class Employee {
     private String name;
     private double BASE_GROSS_SALARY;
 
-    public Employee(String ID, String name, double grossSalary) throws ExceptionsHandler {
+    public Employee(String ID, String name, double grossSalary) throws EmployeeException {
 
         this.ID = ID;
         this.name = name;
         this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
 
+        checkNameValidity();
+        checkIDValidity();
+        checkBaseGrossSalaryValidity();
+
+    }
+
+    public void checkIDValidity() throws EmployeeException {
         if (ID.isEmpty()) {
-            throw new ExceptionsHandler("ID cannot be blank.");
+            throw new EmployeeException("ID cannot be blank.");
         }
+    }
+    public void checkNameValidity() throws EmployeeException {
         if (name.isBlank()) {
-            throw new ExceptionsHandler("Name cannot be blank.");
+            throw new EmployeeException("Name cannot be blank.");
         }
+    }
+    public void checkBaseGrossSalaryValidity() throws EmployeeException {
         if (BASE_GROSS_SALARY<=0) {
-            throw new ExceptionsHandler("Salary must be greater than zero.");
+            throw new EmployeeException("Salary must be greater than zero.");
         }
-
-
     }
 
     public String getName() {
@@ -33,15 +42,16 @@ public class Employee {
     }
 
     //Regular employees and subclasses (e.g. Manager): Can change name.
-    public String updateEmployeeName(String name) {
-
+    public String updateEmployeeName(String name) throws EmployeeException {
         this.name = name;
+        checkNameValidity();
         return successfulUpdate();
     }
 
     //Regular employees and subclasses (e.g. Manager): Can change gross salary.
-    public String updateGrossSalary(double BASE_GROSS_SALARY) {
+    public String updateGrossSalary(double BASE_GROSS_SALARY) throws EmployeeException {
         this.BASE_GROSS_SALARY = BASE_GROSS_SALARY;
+        checkBaseGrossSalaryValidity();
         return successfulUpdate();
     }
 

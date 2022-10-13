@@ -1,7 +1,7 @@
 package assignment3.Employee;
 
 import assignment3.Degrees;
-import assignment3.ExceptionsHandler;
+import assignment3.EmployeeException;
 import assignment3.Truncate;
 
 import java.util.HashMap;
@@ -9,9 +9,19 @@ import java.util.HashMap;
 public class Manager extends Employee {
     private String degree;
 
-    public Manager(String ID, String name, double grossSalary, String degree) throws ExceptionsHandler {
+    public Manager(String ID, String name, double grossSalary, String degree) throws EmployeeException {
         super(ID, name, grossSalary);
         this.degree = degree;
+        checkDegreeValidity();
+    }
+
+    private void checkDegreeValidity() throws EmployeeException {
+
+        if (!(this.degree.equals(Degrees.BSC.toString()) ||
+                this.degree.equals(Degrees.MSC.toString()) ||
+                this.degree.equals(Degrees.PHD.toString()))) {
+            throw new EmployeeException("Degree must be one of the options: PhD, MSc or PhD.");
+        }
     }
 
     public String getDegree() {
@@ -19,8 +29,9 @@ public class Manager extends Employee {
     }
 
     //Manager and children (e.g. Director) can change his/her degree.
-    public String updateManagerDegree(String degree) {
+    public String updateManagerDegree(String degree) throws EmployeeException {
         this.degree = degree;
+        checkDegreeValidity();
         return successfulUpdate();
     }
 
@@ -39,7 +50,4 @@ public class Manager extends Employee {
         return Truncate.truncateToTwoDigits(super.getGrossSalary() * degreeMultiplier.get(this.degree));
     }
 
-    public boolean hasInvalidDegree() {
-        return !(this.degree.equals(Degrees.BSC.toString()) || this.degree.equals(Degrees.MSC.toString()) || this.degree.equals(Degrees.PHD.toString()));
-    }
 }

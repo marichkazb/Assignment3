@@ -1,15 +1,23 @@
 package assignment3.Employee;
 
-import assignment3.Degrees;
 import assignment3.Depts;
-import assignment3.ExceptionsHandler;
+import assignment3.EmployeeException;
 
 public class Director extends Manager {
     private String department;
 
-    public Director(String ID, String name, double grossSalary, String degree, String department) throws ExceptionsHandler {
+    public Director(String ID, String name, double grossSalary, String degree, String department) throws EmployeeException {
         super(ID, name, grossSalary, degree);
         this.department = department;
+        checkDepartmentValidity();
+    }
+
+    private void checkDepartmentValidity() throws EmployeeException {
+        if (!(this.department.equals(Depts.BUSINESS.toString())
+                || this.department.equals(Depts.HUMAN_RESOURCES.toString())
+                || this.department.equals(Depts.TECHNICAL.toString()))) {
+            throw new EmployeeException("Department must be one of the options: Business, Human Resources or Technical.");
+        }
     }
 
     public String getDepartment() {
@@ -17,8 +25,9 @@ public class Director extends Manager {
     }
 
     //Director: Can change his/her department.
-    public String updateDirectorDept(String department) {
+    public String updateDirectorDept(String department) throws EmployeeException {
         this.department = department;
+        checkDepartmentValidity();
         return successfulUpdate();
     }
 
@@ -46,10 +55,6 @@ public class Director extends Manager {
         }
         return netSalary;
     }
-    
-    public boolean hasInvalidDepartment() {
-        return !(this.department.equals(Depts.BUSINESS.toString())
-                || this.department.equals(Depts.HUMAN_RESOURCES.toString())
-                || this.department.equals(Depts.TECHNICAL.toString()));
-    }
+
+
 }

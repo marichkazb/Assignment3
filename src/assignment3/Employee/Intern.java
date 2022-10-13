@@ -1,22 +1,30 @@
 package assignment3.Employee;
 
-import assignment3.ExceptionsHandler;
+import assignment3.EmployeeException;
 import assignment3.Truncate;
 
 public class Intern extends Employee {
     private int GPA;
 
-    public Intern(String ID, String name, double grossSalary, int GPA) throws ExceptionsHandler {
+    public Intern(String ID, String name, double grossSalary, int GPA) throws EmployeeException {
         super(ID, name, grossSalary);
         this.GPA = GPA;
+        checkGPAValidity();
+    }
+
+    private void checkGPAValidity() throws EmployeeException {
+        if(GPA > 10 || this.GPA < 0) {
+            throw new EmployeeException(GPA + "outside range. Must be between 0-10.");
+        }
     }
 
     public int getGPA() {
         return GPA;
     }
 
-    public String updateInternGPA(int GPA) {
+    public String updateInternGPA(int GPA) throws EmployeeException {
         this.GPA = GPA;
+        checkGPAValidity();
         return successfulUpdate();
     }
 
@@ -40,7 +48,5 @@ public class Intern extends Employee {
         return Truncate.truncateToTwoDigits(this.getGrossSalary());
     }
 
-    public boolean hasInvalidGrade() {
-        return this.GPA > 10 || this.GPA < 0;
-    }
+
 }

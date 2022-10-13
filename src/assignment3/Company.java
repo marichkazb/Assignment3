@@ -76,29 +76,34 @@ public class Company {
 
 
     public void checkEmployeeAlreadyRegistered(String ID) throws Exception {
-        if(employeeExists(ID)){
-            throw new Exception("Cannot register. ID " + ID + " is already registered.");
+        if (employeeList.contains(findEmployee(ID))) {
+            throw new EmployeeException("Cannot register. ID " + ID + " is already registered.");
         }
     }
 
-    public boolean employeeExists(String ID) {
-        for (int i = 0; i < employeeList.size(); i++) {
-            Employee currentEmployee = employeeList.get(i);
-            if (currentEmployee.getID().equals(ID)) {
-                return true;
+
+    private Employee findEmployeeObject(String ID) {
+        for (Employee employee : employeeList) {
+            if (employee.getID().equals(ID)) {
+                return employee;
             }
         }
-        return false;
+        return null;
     }
+
+    private Employee findEmployee(String ID) throws Exception {
+        if (findEmployeeObject(ID) != null) {
+            return findEmployeeObject(ID);
+        } else {
+            throw new EmployeeException("Employee " + ID + " was not registered yet.");
+        }
+    }
+
 
     private String registeredString(String ID) {
         return "Employee " + ID + " was registered successfully.";
     }
 
-    public void registerEmployee(String ID, String Name, int grossSalary) throws ExceptionsHandler {
-        Employee newEmployee = new Employee(ID, Name, grossSalary);
-        this.employeeList.add(newEmployee);
-    }
 
     public String removeEmployee(String ID) throws Exception {
 
@@ -111,19 +116,13 @@ public class Company {
 
     public double getNetSalary(String ID) throws Exception {
         Employee desiredEmployee = findEmployee(ID);
+        //If ID wasn't yet created, then desiredEmployee is null
+
         return desiredEmployee.getNetSalary();
     }
 
     public String printEmployee(String ID) throws Exception {
         return findEmployee(ID).toString();
-    }
-
-    public void updateName(String ID, String newName) {
-
-    }
-
-    public void updateSalary(String ID, double newSalary) {
-
     }
 
     public String printAllEmployees() throws Exception {
@@ -139,36 +138,14 @@ public class Company {
         return companyEmployees;
     }
 
-    public void checkEmployeeListEmpty() throws Exception {
+    public void checkEmployeeListEmpty() throws EmployeeException {
+
+
         if (employeeList.isEmpty()) {
-            throw new Exception("No employees registered yet.");
+            throw new EmployeeException("No employees registered yet.");
         }
     }
 
-    public double calculateExpensesGross() {
-
-        return 0.0;
-    }
-
-    public double calculateExpensesNet() {
-
-        return 0.0;
-    }
-
-    public int getNumberOfEmployees() {
-
-        return 0;
-    }
-
-    private Employee findEmployee(String ID) throws Exception {
-        for (int i = 0; i < employeeList.size(); i++) {
-            Employee currentEmployee = employeeList.get(i);
-            if (currentEmployee.getID().equals(ID)) {
-                return currentEmployee;
-            }
-        }
-        throw new Exception("Employee " + ID + " was not registered yet.");
-    }
 
     public String promoteToManager(String ID, String degree) throws Exception {
         Employee currentEmployee = findEmployee(ID);
