@@ -85,6 +85,7 @@ public class Company {
         }
         return null;
     }
+
     private Employee findEmployee(String ID) throws EmployeeException {
         if (findEmployeeObject(ID) != null) {
             return findEmployeeObject(ID);
@@ -92,8 +93,9 @@ public class Company {
             throw new EmployeeException("Employee " + ID + " was not registered yet.");
         }
     }
+
     public void checkEmployeeAlreadyRegistered(String ID) throws EmployeeException {
-        if (findEmployeeObject(ID)!=null) {
+        if (findEmployeeObject(ID) != null) {
             throw new EmployeeException("Cannot register. ID " + ID + " is already registered.");
         }
     }
@@ -149,11 +151,7 @@ public class Company {
 
     public HashMap<String, Integer> mapEachDegree() throws Exception {
 
-        HashMap<String, Integer> degreesMap = new HashMap<String, Integer>();
-
-        degreesMap.put(Degrees.BSC.toString(), 0);
-        degreesMap.put(Degrees.MSC.toString(), 0);
-        degreesMap.put(Degrees.PHD.toString(), 0);
+        HashMap<String, Integer> degreesMap = new HashMap<>();
 
         checkEmployeeListEmpty();
 
@@ -199,6 +197,10 @@ public class Company {
             totalNetSalary = totalNetSalary + employee.getNetSalary();
         }
         return totalNetSalary;
+    }
+
+    public String printAllEmployees() throws Exception {
+        return printList("All registered employees:");
     }
     public String printSortedEmployees() throws Exception {
         Collections.sort(this.employeeList);
