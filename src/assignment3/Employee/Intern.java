@@ -14,12 +14,8 @@ public class Intern extends Employee {
 
     private void checkGPAValidity() throws EmployeeException {
         if(GPA > 10 || this.GPA < 0) {
-            throw new EmployeeException(GPA + "outside range. Must be between 0-10.");
+            throw new EmployeeException(GPA + " outside range. Must be between 0-10.");
         }
-    }
-
-    public int getGPA() {
-        return GPA;
     }
 
     public String updateInternGPA(int GPA) throws EmployeeException {
@@ -47,6 +43,5 @@ public class Intern extends Employee {
     public double getNetSalary() {
         return Truncate.truncateToTwoDigits(this.getGrossSalary());
     }
-
 
 }
