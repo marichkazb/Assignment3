@@ -3,7 +3,9 @@ package assignment3.Employee;
 import assignment3.EmployeeException;
 import assignment3.Truncate;
 
-public class Employee {
+import java.util.Objects;
+
+public class Employee implements Comparable<Employee>{
 
     private final String ID;
     private String name;
@@ -86,6 +88,10 @@ public class Employee {
             return false;
         }
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 
     public String toString() {
         return this.name + "'s gross salary is " + String.format("%.2f", this.getGrossSalary()) + " SEK per month.";
@@ -95,4 +101,15 @@ public class Employee {
         return Truncate.truncateToTwoDigits(this.getGrossSalary() - (this.getGrossSalary() * 0.1));
     }
 
+   public int compareTo(Employee otherEmployee) {
+       double myGrossSalary = this.getGrossSalary();
+       double otherGrossSalary = otherEmployee.getGrossSalary();
+       if (myGrossSalary > otherGrossSalary) {
+           return 1;
+       } else if (myGrossSalary == otherGrossSalary) {
+           return 0;
+       } else {
+           return -1;
+       }
+   }
 }

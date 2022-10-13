@@ -2,17 +2,15 @@ package assignment3;
 
 import assignment3.Employee.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.Collections;
 
 public class Company {
     private ArrayList<Employee> employeeList;
     private static final String EOL = System.lineSeparator();
 
     public Company() {
-        this.employeeList = new ArrayList<Employee>();
+        this.employeeList = new ArrayList<>();
     }
 
     @Override
@@ -162,22 +160,12 @@ public class Company {
         for (Employee currentEmployee : employeeList) {
             if (currentEmployee instanceof Manager) {
                 String degree = ((Manager) currentEmployee).getDegree();
-                for (Map.Entry<String, Integer> entry : degreesMap.entrySet()) {
-                    if (entry.getKey().equals(degree)) {
-                        entry.setValue( entry.getValue() + 1);
-                    }
-                }
+                int currentAmount = degreesMap.getOrDefault(degree, 0);
+                degreesMap.put(degree, currentAmount + 1);
             }
         }
 
-        HashMap<String, Integer> hashMapToDisplay = new HashMap<>();
-
-        for (Map.Entry<String, Integer> entry : degreesMap.entrySet()) {
-            if (entry.getValue() != 0 ) {
-                hashMapToDisplay.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return hashMapToDisplay;
+        return degreesMap;
 
     }
 
@@ -185,19 +173,6 @@ public class Company {
 
     public String printEmployee(String ID) throws Exception {
         return findEmployee(ID).toString();
-    }
-
-    public String printAllEmployees() throws Exception {
-
-        String companyEmployees = "All registered employees:" + EOL;
-
-        checkEmployeeListEmpty();
-
-        for (Employee eachEmployee : employeeList) {
-            companyEmployees = companyEmployees.concat(eachEmployee.toString() + EOL);
-        }
-
-        return companyEmployees;
     }
 
     public void checkEmployeeListEmpty() throws EmployeeException {
@@ -226,10 +201,18 @@ public class Company {
         return totalNetSalary;
     }
     public String printSortedEmployees() throws Exception {
+        Collections.sort(this.employeeList);
+        return printList("Employees sorted by gross salary (ascending order):");
+    }
 
+    public String printList (String title) throws Exception {
         checkEmployeeListEmpty();
+        String companyEmployees = title + EOL;
 
-        return "Employees sorted by gross salary (ascending order):" + EOL;
+        for (Employee eachEmployee : employeeList) {
+            companyEmployees = companyEmployees.concat(eachEmployee.toString() + EOL);
+        }
+        return companyEmployees;
     }
 }
 
