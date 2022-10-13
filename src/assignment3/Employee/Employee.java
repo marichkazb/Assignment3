@@ -32,7 +32,7 @@ public class Employee {
         }
     }
     public void checkBaseGrossSalaryValidity() throws EmployeeException {
-        if (BASE_GROSS_SALARY<=0) {
+        if (BASE_GROSS_SALARY <= 0) {
             throw new EmployeeException("Salary must be greater than zero.");
         }
     }

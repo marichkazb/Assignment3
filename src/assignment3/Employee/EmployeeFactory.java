@@ -3,23 +3,19 @@ package assignment3.Employee;
 public class EmployeeFactory {
 
     public static Employee createEmployee(String ID, String employeeName, double grossSalary) throws Exception {
-        Employee newEmployee = new Employee(ID, employeeName, grossSalary);
-        return newEmployee;
+        return new Employee(ID, employeeName, grossSalary);
     }
 
     public static Employee createEmployee(String ID, String employeeName, double grossSalary, String degree) throws Exception {
-        Employee newManager = new Manager(ID, employeeName, grossSalary, degree);
-        return newManager;
+        return new Manager(ID, employeeName, grossSalary, degree);
     }
 
     public static Employee createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) throws Exception {
-        Employee newDirector = new Director(ID, employeeName, grossSalary, degree, department);
-        return newDirector;
+        return new Director(ID, employeeName, grossSalary, degree, department);
     }
 
     public static Employee createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws Exception {
-        Employee newIntern = new Intern(ID, employeeName, grossSalary, GPA);
-        return newIntern;
+        return new Intern(ID, employeeName, grossSalary, GPA);
     }
 
 

@@ -20,7 +20,7 @@ public class Manager extends Employee {
         if (!(this.degree.equals(Degrees.BSC.toString()) ||
                 this.degree.equals(Degrees.MSC.toString()) ||
                 this.degree.equals(Degrees.PHD.toString()))) {
-            throw new EmployeeException("Degree must be one of the options: PhD, MSc or PhD.");
+            throw new EmployeeException("Degree must be one of the options: BSc, MSc or PhD.");
         }
     }
 
