@@ -86,17 +86,17 @@ public class Company {
         return null;
     }
 
-    private Employee findEmployee(String ID) throws EmployeeException {
+    private Employee findEmployee(String ID) throws CompanyException {
         if (findEmployeeObject(ID) != null) {
             return findEmployeeObject(ID);
         } else {
-            throw new EmployeeException("Employee " + ID + " was not registered yet.");
+            throw new CompanyException("Employee " + ID + " was not registered yet.");
         }
     }
 
-    public void checkEmployeeAlreadyRegistered(String ID) throws EmployeeException {
+    public void checkEmployeeAlreadyRegistered(String ID) throws CompanyException {
         if (findEmployeeObject(ID) != null) {
-            throw new EmployeeException("Cannot register. ID " + ID + " is already registered.");
+            throw new CompanyException("Cannot register. ID " + ID + " is already registered.");
         }
     }
 
@@ -173,9 +173,9 @@ public class Company {
         return findEmployee(ID).toString();
     }
 
-    public void checkEmployeeListEmpty() throws EmployeeException {
+    public void checkEmployeeListEmpty() throws CompanyException {
         if (employeeList.isEmpty()) {
-            throw new EmployeeException("No employees registered yet.");
+            throw new CompanyException("No employees registered yet.");
         }
     }
 
