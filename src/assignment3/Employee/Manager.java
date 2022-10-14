@@ -16,12 +16,12 @@ public class Manager extends Employee {
     }
 
     private void checkDegreeValidity() throws EmployeeException {
-
-        if (!(this.degree.equals(Degrees.BSC.toString()) ||
-                this.degree.equals(Degrees.MSC.toString()) ||
-                this.degree.equals(Degrees.PHD.toString()))) {
-            throw new EmployeeException("Degree must be one of the options: BSc, MSc or PhD.");
+        for(Degrees degree : Degrees.values()){
+            if(degree.toString().equals(this.degree)){
+                return;
+            }
         }
+        throw new EmployeeException("Degree must be one of the options: BSc, MSc or PhD.");
     }
 
     public String getDegree() {

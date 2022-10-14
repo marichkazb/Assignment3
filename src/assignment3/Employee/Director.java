@@ -1,5 +1,6 @@
 package assignment3.Employee;
 
+import assignment3.Degrees;
 import assignment3.Depts;
 import assignment3.EmployeeException;
 
@@ -13,11 +14,12 @@ public class Director extends Manager {
     }
 
     private void checkDepartmentValidity() throws EmployeeException {
-        if (!(this.department.equals(Depts.BUSINESS.toString())
-                || this.department.equals(Depts.HUMAN_RESOURCES.toString())
-                || this.department.equals(Depts.TECHNICAL.toString()))) {
-            throw new EmployeeException("Department must be one of the options: Business, Human Resources or Technical.");
+        for (Depts dept : Depts.values()) {
+            if (dept.toString().equals(this.department)) {
+                return;
+            }
         }
+        throw new EmployeeException("Department must be one of the options: Business, Human Resources or Technical.");
     }
 
     public String getDepartment() {
