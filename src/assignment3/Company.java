@@ -127,7 +127,7 @@ public class Company {
     // PROMOTE EMPLOYEES
     public String promoteToManager(String ID, String degree) throws Exception {
         Employee currentEmployee = findEmployee(ID);
-        Employee newManager = new Manager(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
+        Employee newManager = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
         employeeList.remove(currentEmployee);
         employeeList.add(newManager);
         return ID + " promoted successfully to Manager.";
@@ -135,7 +135,7 @@ public class Company {
 
     public String promoteToDirector(String ID, String degree, String department) throws Exception {
         Employee currentEmployee = findEmployee(ID);
-        Employee newDirector = new Director(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
+        Employee newDirector = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
         employeeList.remove(currentEmployee);
         employeeList.add(newDirector);
         return ID + " promoted successfully to Director.";
@@ -143,7 +143,7 @@ public class Company {
 
     public String promoteToIntern(String ID, int GPA) throws Exception {
         Employee currentEmployee = findEmployee(ID);
-        Employee newIntern = new Intern(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
+        Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
         employeeList.remove(currentEmployee);
         employeeList.add(newIntern);
         return ID + " promoted successfully to Intern.";
