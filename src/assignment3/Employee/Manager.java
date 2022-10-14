@@ -11,8 +11,8 @@ public class Manager extends Employee {
 
     public Manager(String ID, String name, double grossSalary, String degree) throws EmployeeException {
         super(ID, name, grossSalary);
-        this.degree = degree;
         checkDegreeValidity();
+        this.degree = degree;
     }
 
     private void checkDegreeValidity() throws EmployeeException {

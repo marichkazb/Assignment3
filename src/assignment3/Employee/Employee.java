@@ -12,15 +12,13 @@ public class Employee implements Comparable<Employee>{
     private double BASE_GROSS_SALARY;
 
     public Employee(String ID, String name, double grossSalary) throws EmployeeException {
-
-        this.ID = ID;
-        this.name = name;
-        this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
-
         checkNameValidity();
         checkIDValidity();
         checkBaseGrossSalaryValidity();
 
+        this.ID = ID;
+        this.name = name;
+        this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
     }
 
     public void checkIDValidity() throws EmployeeException {

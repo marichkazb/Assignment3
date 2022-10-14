@@ -9,8 +9,8 @@ public class Director extends Manager {
 
     public Director(String ID, String name, double grossSalary, String degree, String department) throws EmployeeException {
         super(ID, name, grossSalary, degree);
-        this.department = department;
         checkDepartmentValidity();
+        this.department = department;
     }
 
     private void checkDepartmentValidity() throws EmployeeException {

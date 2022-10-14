@@ -8,8 +8,8 @@ public class Intern extends Employee {
 
     public Intern(String ID, String name, double grossSalary, int GPA) throws EmployeeException {
         super(ID, name, grossSalary);
-        this.GPA = GPA;
         checkGPAValidity();
+        this.GPA = GPA;
     }
 
     private void checkGPAValidity() throws EmployeeException {
