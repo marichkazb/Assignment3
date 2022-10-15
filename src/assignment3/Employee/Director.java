@@ -1,6 +1,5 @@
 package assignment3.Employee;
 
-import assignment3.Degrees;
 import assignment3.Depts;
 import assignment3.EmployeeException;
 
@@ -30,7 +29,7 @@ public class Director extends Manager {
     public String updateDirectorDept(String department) throws EmployeeException {
         checkDepartmentValidity(department);
         this.department = department;
-        return successfulUpdate();
+        return successfulUpdateMsg();
     }
 
     @Override

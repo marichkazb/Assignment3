@@ -32,7 +32,7 @@ public class Manager extends Employee {
     public String updateManagerDegree(String degree) throws EmployeeException {
         checkDegreeValidity(degree);
         this.degree = degree;
-        return successfulUpdate();
+        return successfulUpdateMsg();
     }
 
     @Override

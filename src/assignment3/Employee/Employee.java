@@ -36,27 +36,8 @@ public class Employee implements Comparable<Employee>{
             throw new EmployeeException("Salary must be greater than zero.");
         }
     }
-
     public String getName() {
         return name;
-    }
-
-    //Regular employees and subclasses (e.g. Manager): Can change name.
-    public String updateEmployeeName(String name) throws EmployeeException {
-        checkNameValidity(name);
-        this.name = name;
-        return successfulUpdate();
-    }
-
-    //Regular employees and subclasses (e.g. Manager): Can change gross salary.
-    public String updateGrossSalary(double BASE_GROSS_SALARY) throws EmployeeException {
-        checkBaseGrossSalaryValidity(BASE_GROSS_SALARY);
-        this.BASE_GROSS_SALARY = BASE_GROSS_SALARY;
-        return successfulUpdate();
-    }
-
-    public String successfulUpdate() {
-        return "Employee " + ID + " was updated successfully";
     }
 
     public double getBaseGrossSalary() {
@@ -69,6 +50,24 @@ public class Employee implements Comparable<Employee>{
 
     public String getID() {
         return ID;
+    }
+
+    //Regular employees and subclasses (e.g. Manager): Can change name.
+    public String updateEmployeeName(String name) throws EmployeeException {
+        checkNameValidity(name);
+        this.name = name;
+        return successfulUpdateMsg();
+    }
+
+    //Regular employees and subclasses (e.g. Manager): Can change gross salary.
+    public String updateGrossSalary(double BASE_GROSS_SALARY) throws EmployeeException {
+        checkBaseGrossSalaryValidity(BASE_GROSS_SALARY);
+        this.BASE_GROSS_SALARY = BASE_GROSS_SALARY;
+        return successfulUpdateMsg();
+    }
+
+    public String successfulUpdateMsg() {
+        return "Employee " + ID + " was updated successfully";
     }
 
     //Two employees are equals if they have the same ID
