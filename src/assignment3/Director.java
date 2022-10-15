@@ -1,8 +1,4 @@
-package assignment3.Employee;
-
-import assignment3.Degrees;
-import assignment3.Depts;
-import assignment3.EmployeeException;
+package assignment3;
 
 public class Director extends Manager {
     private String department;
