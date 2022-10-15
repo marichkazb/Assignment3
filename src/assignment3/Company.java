@@ -13,26 +13,6 @@ public class Company {
         this.employeeList = new ArrayList<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Company company = (Company) o;
-        return Objects.equals(employeeList, company.employeeList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(employeeList);
-    }
-
-    @Override
-    public String toString() {
-        return "Company{" +
-                "employeeList=" + employeeList +
-                '}';
-    }
-
     //CREATE EMPLOYEES OVERLOADING
     public String createEmployee(String ID, String employeeName, double grossSalary) throws Exception {
 
