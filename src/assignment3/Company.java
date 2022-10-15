@@ -15,40 +15,30 @@ public class Company {
 
     //CREATE EMPLOYEES OVERLOADING
     public String createEmployee(String ID, String employeeName, double grossSalary) throws Exception {
-
         checkEmployeeAlreadyRegistered(ID);
-
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary);
         this.employeeList.add(newEmployee);
-
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, String degree) throws Exception {
         checkEmployeeAlreadyRegistered(ID);
-
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree);
         this.employeeList.add(newEmployee);
-
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) throws Exception {
         checkEmployeeAlreadyRegistered(ID);
-
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree, department);
         this.employeeList.add(newEmployee);
-
         return this.registeredString(ID);
     }
 
     public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws Exception {
-
         checkEmployeeAlreadyRegistered(ID);
-
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, GPA);
         this.employeeList.add(newEmployee);
-
         return this.registeredString(ID);
     }
 
