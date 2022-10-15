@@ -21,6 +21,13 @@ public class Company {
         return this.registeredString(ID);
     }
 
+    public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws Exception {
+        checkEmployeeAlreadyRegistered(ID);
+        Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, GPA);
+        this.employeeList.add(newEmployee);
+        return this.registeredString(ID);
+    }
+
     public String createEmployee(String ID, String employeeName, double grossSalary, String degree) throws Exception {
         checkEmployeeAlreadyRegistered(ID);
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree);
@@ -35,39 +42,34 @@ public class Company {
         return this.registeredString(ID);
     }
 
-    public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws Exception {
-        checkEmployeeAlreadyRegistered(ID);
-        Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, GPA);
-        this.employeeList.add(newEmployee);
-        return this.registeredString(ID);
-    }
-
     private String registeredString(String ID) {
         return "Employee " + ID + " was registered successfully.";
     }
 
-    // FIND EMPLOYEE
-    private Employee findEmployeeObject(String ID) {
-        for (Employee employee : employeeList) {
-            if (employee.getID().equals(ID)) {
-                return employee;
-            }
-        }
-        return null;
+
+    public String promoteToIntern(String ID, int GPA) throws Exception {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newIntern);
+        return ID + " promoted successfully to Intern.";
     }
 
-    private Employee findEmployee(String ID) throws CompanyException {
-        if (findEmployeeObject(ID) != null) {
-            return findEmployeeObject(ID);
-        } else {
-            throw new CompanyException("Employee " + ID + " was not registered yet.");
-        }
+    // PROMOTE EMPLOYEES
+    public String promoteToManager(String ID, String degree) throws Exception {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newManager = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newManager);
+        return ID + " promoted successfully to Manager.";
     }
 
-    public void checkEmployeeAlreadyRegistered(String ID) throws CompanyException {
-        if (findEmployeeObject(ID) != null) {
-            throw new CompanyException("Cannot register. ID " + ID + " is already registered.");
-        }
+    public String promoteToDirector(String ID, String degree, String department) throws Exception {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newDirector = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
+        employeeList.remove(currentEmployee);
+        employeeList.add(newDirector);
+        return ID + " promoted successfully to Director.";
     }
 
 
@@ -94,30 +96,49 @@ public class Company {
         return ((Director) findEmployee(ID)).updateDirectorDept(newDept);
     }
 
-    // PROMOTE EMPLOYEES
-    public String promoteToManager(String ID, String degree) throws Exception {
-        Employee currentEmployee = findEmployee(ID);
-        Employee newManager = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
-        employeeList.remove(currentEmployee);
-        employeeList.add(newManager);
-        return ID + " promoted successfully to Manager.";
+    // SINGLE EMPLOYEE ACTIONS
+
+    public String printEmployee(String ID) throws Exception {
+        return findEmployee(ID).toString();
     }
 
-    public String promoteToDirector(String ID, String degree, String department) throws Exception {
-        Employee currentEmployee = findEmployee(ID);
-        Employee newDirector = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
-        employeeList.remove(currentEmployee);
-        employeeList.add(newDirector);
-        return ID + " promoted successfully to Director.";
+    public String removeEmployee(String ID) throws Exception {
+        employeeList.remove(findEmployee(ID));
+        return "Employee " + ID + " was successfully removed.";
     }
 
-    public String promoteToIntern(String ID, int GPA) throws Exception {
-        Employee currentEmployee = findEmployee(ID);
-        Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
-        employeeList.remove(currentEmployee);
-        employeeList.add(newIntern);
-        return ID + " promoted successfully to Intern.";
+    public double getNetSalary(String ID) throws Exception {
+        return findEmployee(ID).getNetSalary();
     }
+
+    // FIND EMPLOYEE
+    private Employee findEmployeeOrNull(String ID) {
+        for (Employee employee : employeeList) {
+            if (employee.getID().equals(ID)) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    private Employee findEmployee(String ID) throws CompanyException {
+        if (findEmployeeOrNull(ID) != null) {
+            return findEmployeeOrNull(ID);
+        } else {
+            throw new CompanyException("Employee " + ID + " was not registered yet.");
+        }
+    }
+
+
+    public String printAllEmployees() throws Exception {
+        return printList("All registered employees:");
+    }
+
+    public String printSortedEmployees() throws Exception {
+        Collections.sort(this.employeeList);
+        return printList("Employees sorted by gross salary (ascending order):");
+    }
+
 
     public HashMap<String, Integer> mapEachDegree() throws Exception {
 
@@ -137,26 +158,6 @@ public class Company {
 
     }
 
-    // EMPLOYEE ACTIONS
-
-    public String printEmployee(String ID) throws Exception {
-        return findEmployee(ID).toString();
-    }
-
-    public void checkEmployeeListEmpty() throws CompanyException {
-        if (employeeList.isEmpty()) {
-            throw new CompanyException("No employees registered yet.");
-        }
-    }
-
-    public String removeEmployee(String ID) throws Exception {
-        employeeList.remove(findEmployee(ID));
-        return "Employee " + ID + " was successfully removed.";
-    }
-
-    public double getNetSalary(String ID) throws Exception {
-        return findEmployee(ID).getNetSalary();
-    }
 
     public double getTotalNetSalary() throws Exception {
         double totalNetSalary = 0;
@@ -169,15 +170,8 @@ public class Company {
         return totalNetSalary;
     }
 
-    public String printAllEmployees() throws Exception {
-        return printList("All registered employees:");
-    }
-    public String printSortedEmployees() throws Exception {
-        Collections.sort(this.employeeList);
-        return printList("Employees sorted by gross salary (ascending order):");
-    }
 
-    public String printList (String title) throws Exception {
+    private String printList(String title) throws Exception {
         checkEmployeeListEmpty();
         String companyEmployees = title + EOL;
 
@@ -186,5 +180,20 @@ public class Company {
         }
         return companyEmployees;
     }
+
+
+    private void checkEmployeeAlreadyRegistered(String ID) throws CompanyException {
+        if (findEmployeeOrNull(ID) != null) {
+            throw new CompanyException("Cannot register. ID " + ID + " is already registered.");
+        }
+    }
+
+
+    private void checkEmployeeListEmpty() throws CompanyException {
+        if (employeeList.isEmpty()) {
+            throw new CompanyException("No employees registered yet.");
+        }
+    }
+
 }
 
