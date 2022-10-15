@@ -1,7 +1,6 @@
 package assignment3.Employee;
 
 import assignment3.EmployeeException;
-import assignment3.Truncate;
 
 public class Intern extends Employee {
     private int GPA;
