@@ -21,7 +21,7 @@ public class Intern extends Employee {
     public String updateInternGPA(int GPA) throws EmployeeException {
         checkGPAValidity(GPA);
         this.GPA = GPA;
-        return successfulUpdate();
+        return successfulUpdateMsg();
     }
 
     public String toString() {
@@ -41,7 +41,7 @@ public class Intern extends Employee {
 
     @Override
     public double getNetSalary() {
-        return Truncate.truncateToTwoDigits(this.getGrossSalary());
+        return this.getGrossSalary();
     }
 
 }

@@ -10,5 +10,4 @@ public class Truncate {
         double numberToTruncate = (int) numberToCast;
         return numberToTruncate / truncateAuxiliary;
     }
-
 }
