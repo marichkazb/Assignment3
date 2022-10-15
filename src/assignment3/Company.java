@@ -46,7 +46,6 @@ public class Company {
         return "Employee " + ID + " was registered successfully.";
     }
 
-
     public String promoteToIntern(String ID, int GPA) throws Exception {
         Employee currentEmployee = findEmployee(ID);
         Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
