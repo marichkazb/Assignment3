@@ -12,26 +12,26 @@ public class Employee implements Comparable<Employee>{
     private double BASE_GROSS_SALARY;
 
     public Employee(String ID, String name, double grossSalary) throws EmployeeException {
-        checkNameValidity();
-        checkIDValidity();
-        checkBaseGrossSalaryValidity();
+        checkIDValidity(ID);
+        checkNameValidity(name);
+        checkBaseGrossSalaryValidity(grossSalary);
 
         this.ID = ID;
         this.name = name;
         this.BASE_GROSS_SALARY = Truncate.truncateToTwoDigits(grossSalary);
     }
 
-    public void checkIDValidity() throws EmployeeException {
+    public void checkIDValidity(String ID) throws EmployeeException {
         if (ID.isEmpty()) {
             throw new EmployeeException("ID cannot be blank.");
         }
     }
-    public void checkNameValidity() throws EmployeeException {
+    public void checkNameValidity(String name) throws EmployeeException {
         if (name.isBlank()) {
             throw new EmployeeException("Name cannot be blank.");
         }
     }
-    public void checkBaseGrossSalaryValidity() throws EmployeeException {
+    public void checkBaseGrossSalaryValidity(double BASE_GROSS_SALARY) throws EmployeeException {
         if (BASE_GROSS_SALARY <= 0) {
             throw new EmployeeException("Salary must be greater than zero.");
         }
@@ -43,15 +43,15 @@ public class Employee implements Comparable<Employee>{
 
     //Regular employees and subclasses (e.g. Manager): Can change name.
     public String updateEmployeeName(String name) throws EmployeeException {
+        checkNameValidity(name);
         this.name = name;
-        checkNameValidity();
         return successfulUpdate();
     }
 
     //Regular employees and subclasses (e.g. Manager): Can change gross salary.
     public String updateGrossSalary(double BASE_GROSS_SALARY) throws EmployeeException {
+        checkBaseGrossSalaryValidity(BASE_GROSS_SALARY);
         this.BASE_GROSS_SALARY = BASE_GROSS_SALARY;
-        checkBaseGrossSalaryValidity();
         return successfulUpdate();
     }
 

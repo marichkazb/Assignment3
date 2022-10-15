@@ -11,13 +11,13 @@ public class Manager extends Employee {
 
     public Manager(String ID, String name, double grossSalary, String degree) throws EmployeeException {
         super(ID, name, grossSalary);
-        checkDegreeValidity();
+        checkDegreeValidity(degree);
         this.degree = degree;
     }
 
-    private void checkDegreeValidity() throws EmployeeException {
-        for(Degrees degree : Degrees.values()){
-            if(degree.toString().equals(this.degree)){
+    private void checkDegreeValidity(String degree) throws EmployeeException {
+        for(Degrees currentDegree : Degrees.values()){
+            if(currentDegree.toString().equals(degree)){
                 return;
             }
         }
@@ -30,8 +30,8 @@ public class Manager extends Employee {
 
     //Manager and children (e.g. Director) can change his/her degree.
     public String updateManagerDegree(String degree) throws EmployeeException {
+        checkDegreeValidity(degree);
         this.degree = degree;
-        checkDegreeValidity();
         return successfulUpdate();
     }
 

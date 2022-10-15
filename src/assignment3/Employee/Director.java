@@ -9,13 +9,13 @@ public class Director extends Manager {
 
     public Director(String ID, String name, double grossSalary, String degree, String department) throws EmployeeException {
         super(ID, name, grossSalary, degree);
-        checkDepartmentValidity();
+        checkDepartmentValidity(department);
         this.department = department;
     }
 
-    private void checkDepartmentValidity() throws EmployeeException {
+    private void checkDepartmentValidity(String department) throws EmployeeException {
         for (Depts dept : Depts.values()) {
-            if (dept.toString().equals(this.department)) {
+            if (dept.toString().equals(department)) {
                 return;
             }
         }
@@ -28,8 +28,8 @@ public class Director extends Manager {
 
     //Director: Can change his/her department.
     public String updateDirectorDept(String department) throws EmployeeException {
+        checkDepartmentValidity(department);
         this.department = department;
-        checkDepartmentValidity();
         return successfulUpdate();
     }
 

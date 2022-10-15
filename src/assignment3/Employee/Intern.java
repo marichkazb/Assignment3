@@ -8,19 +8,19 @@ public class Intern extends Employee {
 
     public Intern(String ID, String name, double grossSalary, int GPA) throws EmployeeException {
         super(ID, name, grossSalary);
-        checkGPAValidity();
+        checkGPAValidity(GPA);
         this.GPA = GPA;
     }
 
-    private void checkGPAValidity() throws EmployeeException {
-        if(GPA > 10 || this.GPA < 0) {
+    private void checkGPAValidity(int GPA) throws EmployeeException {
+        if(GPA > 10 || GPA < 0) {
             throw new EmployeeException(GPA + " outside range. Must be between 0-10.");
         }
     }
 
     public String updateInternGPA(int GPA) throws EmployeeException {
+        checkGPAValidity(GPA);
         this.GPA = GPA;
-        checkGPAValidity();
         return successfulUpdate();
     }
 
