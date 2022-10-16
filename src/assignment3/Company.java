@@ -46,6 +46,14 @@ public class Company {
         return "Employee " + ID + " was registered successfully.";
     }
 
+    public String promoteToEmployee(String ID) throws CompanyException, EmployeeException {
+        Employee currentEmployee = findEmployee(ID);
+        Employee newEmployee = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary());
+        employeeList.remove(currentEmployee);
+        employeeList.add(newEmployee);
+        return ID + " promoted successfully to Employee.";
+    }
+
     public String promoteToIntern(String ID, int GPA) throws CompanyException, EmployeeException {
         Employee currentEmployee = findEmployee(ID);
         Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
