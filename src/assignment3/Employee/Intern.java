@@ -23,6 +23,10 @@ public class Intern extends Employee {
         return successfulUpdateMsg();
     }
 
+    public int getGPA() {
+        return this.GPA;
+    }
+
     public String toString() {
         return super.toString() + " GPA: " + this.GPA;
     }
