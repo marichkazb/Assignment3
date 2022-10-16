@@ -34,7 +34,7 @@ public class Company {
     }
 
     //CREATE EMPLOYEES OVERLOADING
-    public String createEmployee(String ID, String employeeName, double grossSalary) throws Exception {
+    public String createEmployee(String ID, String employeeName, double grossSalary) throws CompanyException, EmployeeException {
 
         checkEmployeeAlreadyRegistered(ID);
 
@@ -44,7 +44,7 @@ public class Company {
         return this.registeredString(ID);
     }
 
-    public String createEmployee(String ID, String employeeName, double grossSalary, String degree) throws Exception {
+    public String createEmployee(String ID, String employeeName, double grossSalary, String degree) throws CompanyException, EmployeeException {
         checkEmployeeAlreadyRegistered(ID);
 
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree);
@@ -53,7 +53,7 @@ public class Company {
         return this.registeredString(ID);
     }
 
-    public String createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) throws Exception {
+    public String createEmployee(String ID, String employeeName, double grossSalary, String degree, String department) throws CompanyException, EmployeeException {
         checkEmployeeAlreadyRegistered(ID);
 
         Employee newEmployee = EmployeeFactory.createEmployee(ID, employeeName, grossSalary, degree, department);
@@ -62,7 +62,7 @@ public class Company {
         return this.registeredString(ID);
     }
 
-    public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws Exception {
+    public String createEmployee(String ID, String employeeName, double grossSalary, int GPA) throws CompanyException, EmployeeException {
 
         checkEmployeeAlreadyRegistered(ID);
 
@@ -102,30 +102,30 @@ public class Company {
 
 
     //UPDATE EMPLOYEES
-    public String updateEmployeeName(String ID, String newName) throws Exception {
+    public String updateEmployeeName(String ID, String newName) throws CompanyException, EmployeeException {
         return findEmployee(ID).updateEmployeeName(newName);
     }
 
-    public String updateGrossSalary(String ID, double newGrossSalary) throws Exception {
+    public String updateGrossSalary(String ID, double newGrossSalary) throws CompanyException, EmployeeException {
         return findEmployee(ID).updateGrossSalary(newGrossSalary);
     }
 
-    public String updateInternGPA(String ID, int newGPA) throws Exception {
+    public String updateInternGPA(String ID, int newGPA) throws CompanyException, EmployeeException {
         return ((Intern) findEmployee(ID)).updateInternGPA(newGPA);
     }
 
 
-    public String updateManagerDegree(String ID, String newDegree) throws Exception {
+    public String updateManagerDegree(String ID, String newDegree) throws CompanyException, EmployeeException {
         return ((Manager) findEmployee(ID)).updateManagerDegree(newDegree);
     }
 
 
-    public String updateDirectorDept(String ID, String newDept) throws Exception {
+    public String updateDirectorDept(String ID, String newDept) throws CompanyException, EmployeeException {
         return ((Director) findEmployee(ID)).updateDirectorDept(newDept);
     }
 
     // PROMOTE EMPLOYEES
-    public String promoteToManager(String ID, String degree) throws Exception {
+    public String promoteToManager(String ID, String degree) throws CompanyException, EmployeeException {
         Employee currentEmployee = findEmployee(ID);
         Employee newManager = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree);
         employeeList.remove(currentEmployee);
@@ -133,7 +133,7 @@ public class Company {
         return ID + " promoted successfully to Manager.";
     }
 
-    public String promoteToDirector(String ID, String degree, String department) throws Exception {
+    public String promoteToDirector(String ID, String degree, String department) throws CompanyException, EmployeeException  {
         Employee currentEmployee = findEmployee(ID);
         Employee newDirector = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), degree, department);
         employeeList.remove(currentEmployee);
@@ -141,7 +141,7 @@ public class Company {
         return ID + " promoted successfully to Director.";
     }
 
-    public String promoteToIntern(String ID, int GPA) throws Exception {
+    public String promoteToIntern(String ID, int GPA) throws CompanyException, EmployeeException {
         Employee currentEmployee = findEmployee(ID);
         Employee newIntern = EmployeeFactory.createEmployee(currentEmployee.getID(), currentEmployee.getName(), currentEmployee.getBaseGrossSalary(), GPA);
         employeeList.remove(currentEmployee);
@@ -149,7 +149,7 @@ public class Company {
         return ID + " promoted successfully to Intern.";
     }
 
-    public HashMap<String, Integer> mapEachDegree() throws Exception {
+    public HashMap<String, Integer> mapEachDegree() throws CompanyException {
 
         HashMap<String, Integer> degreesMap = new HashMap<>();
 
@@ -169,7 +169,7 @@ public class Company {
 
     // EMPLOYEE ACTIONS
 
-    public String printEmployee(String ID) throws Exception {
+    public String printEmployee(String ID) throws CompanyException {
         return findEmployee(ID).toString();
     }
 
@@ -179,16 +179,16 @@ public class Company {
         }
     }
 
-    public String removeEmployee(String ID) throws Exception {
+    public String removeEmployee(String ID) throws CompanyException {
         employeeList.remove(findEmployee(ID));
         return "Employee " + ID + " was successfully removed.";
     }
 
-    public double getNetSalary(String ID) throws Exception {
+    public double getNetSalary(String ID) throws CompanyException {
         return findEmployee(ID).getNetSalary();
     }
 
-    public double getTotalNetSalary() throws Exception {
+    public double getTotalNetSalary() throws CompanyException {
         double totalNetSalary = 0;
 
         checkEmployeeListEmpty();
@@ -199,15 +199,15 @@ public class Company {
         return totalNetSalary;
     }
 
-    public String printAllEmployees() throws Exception {
+    public String printAllEmployees() throws CompanyException {
         return printList("All registered employees:");
     }
-    public String printSortedEmployees() throws Exception {
+    public String printSortedEmployees() throws CompanyException {
         Collections.sort(this.employeeList);
         return printList("Employees sorted by gross salary (ascending order):");
     }
 
-    public String printList (String title) throws Exception {
+    public String printList (String title) throws CompanyException {
         checkEmployeeListEmpty();
         String companyEmployees = title + EOL;
 
